@@ -2,7 +2,7 @@
 
 // go:build ignore
 
-#include "./headers/common.h"
+#include "./headers3/bpf_helpers.h"
 
 char __license[] SEC("license") = "Dual MIT/GPL";
 
@@ -16,6 +16,8 @@ struct bpf_map_def SEC("maps") pkt_count = {
 SEC("socket")
 int ebpf_test(struct __sk_buff *skb)
 {
+    bpf_get_current_pid_tgid();
+
     u32 key = 0;
     u64 init_val = 1;
 
